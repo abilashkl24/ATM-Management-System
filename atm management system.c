@@ -2,129 +2,106 @@
 
 int main()
 {
-    int password;
-    int choice;
-    float balance = 20000, amount;
-    char receipt;
-
-    printf("    WELCOME TO ATM     \n");
-
-    while(1)
+    int a,i;
+    int choose;
+    float Withdraw,Amount,receipt;
+    float Balance=15000;
+    printf("Welcome to IOB bank\n");
+    printf("Please insert the  Card !");
+    for(i=1;i<=3;i++)
     {
-        printf("Enter 4-digit Password: ");
-        scanf("%d", &password);
-
-        if(password >= 1000 && password <= 9999)
+    printf("\nEnter the PIN: ");
+    scanf("%d",&a);
+    if (a>=1000 && 9999>=a)
+    {
+     choose :
+      
+      printf("\n----ATM MENU----");
+      printf("\n1.Balance Enquiry");
+      printf("\n2.Withdraw");
+      printf("\n3.Deposit");
+      printf("\n4.Exit");
+      printf("\nChoose the Option: ");
+      scanf("%d",&choose);
+      
+    switch(choose)
+      {
+    case 1:
+        printf("Do you want receipt? (1=Yes / 0=No): ");
+        scanf("\n%f",&receipt);
+        if (receipt==1)
+        {  
+           printf("\n--- ATM RECEIPT ---\n");
+           printf("\nYour Account Balance: %.1f",Balance);
+           printf("\nThank You");
+        }
+        else 
         {
-            break;
+            printf("\nYour Account Balance: %.1f",Balance);
+            printf("\nThank you");
+        }
+        goto choose;
+        
+    case 2:
+        printf("Enter to Amount Withdraw: ");
+        scanf("\n%f",&Amount);
+        if(Balance>=Amount)
+        {   
+            Balance = Balance - Amount;
+            printf("Do you want receipt? (1=Yes / 0=No): ");
+            scanf("%f",&receipt);
+            printf("\n Withdrawal Succesfull");
+            if (receipt==1)
+            {
+            printf("\n--- ATM RECEIPT ---\n");
+            printf("Withdrawal Amount: %.2f\n",Amount);
+            printf("Total Balance: %.2f\n",Balance);  
+            }
+            else 
+            {
+                printf("Thank You\n");
+            }
         }
         else
-        {
-            printf("Incorrect password\n");
-        }
+            {
+                printf("Insufficient balance!\n");
+            }
+             goto choose;
+        case 3:
+            printf("Enter the Deposit Amount: ");
+            scanf("%f",&Amount);
+            Balance=Balance+Amount;
+            
+            printf("Do you want receipt? (1=Yes / 0=No): ");
+            scanf("%f", &receipt);
+            printf("Deposit Succesfull\n ");
+            if (receipt == 1)
+                {
+                    printf("\n--- ATM RECEIPT ---\n");
+                    printf("Deposit Amount: %.2f\n", Amount);
+                    printf("Total Balance: %.2f\n", Balance);
+                    printf("Thank You For using ATM\n");
+                }
+                else 
+                {
+                    printf("Thank you\n");
+                }
+            goto choose;
+        case 4:
+            printf("Thank you for using ATM\n");
+            return 0;
+        default:
+            printf("Wrong option ?\n");
+            printf("Please select the correct option :");
+            goto choose;
+      }   
     }
-
-    while(1)
+    else 
     {
-        printf("\n   ATM MENU     \n");
-        printf("1. Withdraw\n");
-        printf("2. Deposit\n");
-        printf("3. Balance Enquiry\n");
-        printf("4. Exit\n");
-
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch(choice)
-        {
-            case 1:
-
-                printf("Enter amount to withdraw: ");
-                scanf("%f", &amount);
-
-                if(amount >= 500 && amount <= 10000)
-                {
-                    if(amount <= balance)
-                    {
-                        balance = balance - amount;
-
-                        printf("Please collect your amount.\n");
-
-                        printf("Receipt (Y/N): ");
-                        scanf(" %c", &receipt);
-
-                        if(receipt == 'Y' || receipt == 'y')
-                        {
-                            printf("\n    RECEIPT     \n");
-                            printf("Withdrawn Amount : %.2f\n", amount);
-                            printf("Available Balance : %.2f\n", balance);
-                        }
-                    }
-                    else
-                    {
-                        printf("Insufficient Balance!\n");
-                    }
-                }
-                else
-                {
-                    printf("Invalid Amount!\n");
-                }
-
-                break;
-
-            case 2:
-
-                printf("Enter amount to deposit: ");
-                scanf("%f", &amount);
-
-                if(amount >= 500 && amount <= 10000)
-                {
-                    balance = balance + amount;
-
-                    printf("Deposited Successfully.\n");
-
-                    printf("Receipt (Y/N): ");
-                    scanf(" %c", &receipt);
-
-                    if(receipt == 'Y' || receipt == 'y')
-                    {
-                        printf("\n    RECEIPT    \n");
-                        printf("Deposited Amount : %.2f\n", amount);
-                        printf("Available Balance : %.2f\n", balance);
-                    }
-                }
-                else
-                {
-                    printf("Invalid Amount!\n");
-                }
-
-                break;
-
-            case 3:
-
-                printf("Available Balance : %.2f\n", balance);
-
-                printf("Receipt (Y/N): ");
-                scanf(" %c", &receipt);
-
-                if(receipt == 'Y' || receipt == 'y')
-                {
-                    printf("\n    RECEIPT   \n");
-                    printf("Available Balance : %.2f\n", balance);
-                }
-
-                break;
-
-            case 4:
-
-                printf("Thank You For Using ATM.\n");
-                return 0;
-
-            default:
-
-                printf("Invalid Choice!\n");
-        }
+        printf("\nIncorret Pin\n");
+        
     }
-
-    return 0;
+    }
+    printf("Card has been blocked !\n");
+return 0;
 }
